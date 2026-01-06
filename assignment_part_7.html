@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service and Controller Pattern</title>
+</head>
+<body>
+    <script>
+         class Book {
+  title;
+  #isBorrowed;
+
+  constructor(title) {
+    this.title = title;
+    this.#isBorrowed = false;
+  }
+
+  borrow() {
+    this.#isBorrowed = true;
+  }
+
+  returnBook() {
+    this.#isBorrowed = false;
+  }
+
+  getStatus() {
+    return this.#isBorrowed ? "borrowed" : "available";
+  }
+}
+
+class EBook extends Book {
+        fileSizeMB;
+
+        constructor(title, fileSizeMB) {
+          super(title); 
+          this.fileSizeMB = fileSizeMB;
+        }
+
+        download() {
+          console.log(`Downloading "${this.title}" (${this.fileSizeMB}MB)...`);
+        }
+    }
+    class Magazine extends Book {
+        issueNumber;
+
+        constructor(title, issueNumber) {
+          super(title);
+          this.issueNumber = issueNumber;
+        }
+
+        readIssue() {
+          console.log(`Reading "${this.title}", Issue ${this.issueNumber}`);
+        }
+      }
+        class LibraryService {
+  constructor() {
+    this.books = [];
+  }
+
+  addBook(book) {
+    this.books.push(book);
+  }
+
+  listBooks() {
+    return this.books.map(book => ({
+      title: book.title,
+      status: book.getStatus()
+    }));
+  }
+}
+class LibraryController {
+  constructor(libraryService) {
+    this.libraryService = libraryService;
+  }
+
+  addBook(book) {
+    this.libraryService.addBook(book);
+  }
+
+  listBooks() {
+    return this.libraryService.listBooks();
+  }
+}
+
+const libraryService = new LibraryService();
+const libraryController = new LibraryController(libraryService);
+
+const book1 = new Book("Back End Tuto");
+const ebook1 = new EBook("Back End Guide", 5);
+const magazine1 = new Magazine("BackEnd Dailies", 42);
+
+libraryController.addBook(book1);
+libraryController.addBook(ebook1);
+libraryController.addBook(magazine1);
+
+book1.borrow();
+ebook1.borrow();
+
+console.log(libraryController.listBooks());
+
+    </script>
+</body>
+</html>

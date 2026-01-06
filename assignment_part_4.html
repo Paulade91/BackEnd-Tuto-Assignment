@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polymorphisms</title>
+  </head>
+  <body>
+    <script>
+      class Book {
+        title;
+        #isBorrowed;
+
+        constructor(title) {
+          this.title = title;
+          this.#isBorrowed = false;
+        }
+
+        borrow() {
+          this.#isBorrowed = true;
+          this.#logStatus();
+        }
+
+        returnBook() {
+          this.#isBorrowed = false;
+          this.#logStatus();
+        }
+
+        getStatus() {
+          return this.#isBorrowed ? "borrowed" : "available";
+        }
+
+        #logStatus() {
+          console.log(`${this.title} is now ${this.getStatus()}`);
+        }
+      }
+
+      class EBook extends Book {
+        fileSizeMB;
+
+        constructor(title, fileSizeMB) {
+          super(title); 
+          this.fileSizeMB = fileSizeMB;
+        }
+
+        download() {
+          console.log(`Downloading "${this.title}" (${this.fileSizeMB}MB)...`);
+        }
+        
+        // Polymorphism: override borrow()
+        borrow() {
+          super.borrow(); 
+          console.log(`"${this.title}" can also be downloaded.`);
+        }
+      }
+      const book = new Book("Back End Tuto");
+const ebook = new EBook("Back End Guide", 5);
+
+ebook.borrow();
+ebook.download();
+
+    </script>
+  </body>
+</html>

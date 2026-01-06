@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes & Encapsulation</title>
+</head>
+<body>
+    <script>
+        class Book {
+  title;
+  #isBorrowed;
+
+  constructor(title) {
+    this.title = title;
+    this.#isBorrowed = false;
+  }
+
+  borrow() {
+    this.#isBorrowed = true;
+  }
+
+  returnBook() {
+    this.#isBorrowed = false;
+  }
+
+  getStatus() {
+    return this.#isBorrowed ? "borrowed" : "available";
+  }
+}
+const book = new Book("Back End Tuto");
+
+console.log(book.title);         
+console.log(book.getStatus());    
+
+book.borrow();
+console.log(book.getStatus());   
+
+book.returnBook();
+console.log(book.getStatus());    
+
+    </script>
+</body>
+</html>

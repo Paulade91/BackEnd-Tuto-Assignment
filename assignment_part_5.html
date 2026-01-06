@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abstraction (Public API)</title>
+  </head>
+  <body>
+    <script>
+      class Book {
+        title;
+        #isBorrowed;
+
+        constructor(title) {
+          this.title = title;
+          this.#isBorrowed = false;
+        }
+
+        borrow() {
+          this.#isBorrowed = true;
+        }
+
+        returnBook() {
+          this.#isBorrowed = false;
+        }
+
+        getStatus() {
+          return this.#isBorrowed ? "borrowed" : "available";
+        }
+      }
+      class Magazine extends Book {
+        issueNumber;
+
+        constructor(title, issueNumber) {
+          super(title);
+          this.issueNumber = issueNumber;
+        }
+
+        readIssue() {
+          console.log(`Reading "${this.title}", Issue ${this.issueNumber}`);
+        }
+      }
+      const magazine = new Magazine("BackEnd Dailies", 42);
+
+      magazine.readIssue();
+      
+    </script>
+  </body>
+</html>
