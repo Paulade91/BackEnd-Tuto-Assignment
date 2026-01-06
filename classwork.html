@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classwork</title>
+</head>
+<body>
+    <script>
+        // Multiply arrow function
+const multiply = (a, b) => {
+  if (a === undefined && b === undefined) {
+    return "First and second value cannot be empty";
+  }
+
+  if (a === undefined) {
+    return "First value cannot be empty";
+  }
+
+  if (b === undefined) {
+    return "Second value cannot be empty";
+  }
+
+  return `${a} * ${b} = ${a * b}`;
+};
+
+// Divide arrow function
+const divide = (a, b) => {
+  if (a === undefined && b === undefined) {
+    return "First and second value cannot be empty";
+  }
+
+  if (a === undefined) {
+    return "First value cannot be empty";
+  }
+
+  if (b === undefined) {
+    return "Second value cannot be empty";
+  }
+
+  if (b === 0) {
+    return "You cannot divide by zero!";
+  }
+
+  return `${a} / ${b} = ${a / b}`;
+};
+
+console.log(multiply(5, 5));
+console.log(divide(10, 2));
+
+console.log(multiply());
+console.log(multiply(5));
+
+console.log(divide());
+console.log(divide(5));
+console.log(divide(5, 0));
+    </script>
+</body>
+</html>
